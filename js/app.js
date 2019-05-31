@@ -7,8 +7,6 @@ let game = {
     enemyHeight: 60,
     playerWidth: 75,
     playerHeight: 60,
-    playerStartX: tileWidth * 2,
-    playerStartY: tileHeight * 2,
     accelerator: 1.2,
 };
 
@@ -74,14 +72,17 @@ class Enemy {
 // This class requires an update(), render() and
 // a handleInput() method.
 class Player {
-    constructor(x = game.playerStartX, y = game.playerStartY) {
+    constructor(x = game.tileWidth * 2, y = game.tileHeight * 6) {
         this.sprite = 'images/char-cat-girl.png';
         this.x = x;
         this.y = y;
-        this.winner = false;
     };
 
     update = () => {
+        //Check if won
+        this.checkWin()
+
+
         //Player board limitations
         if (this.x < game.lowerLimit) {
             this.x = game.lowerLimit;
@@ -124,12 +125,30 @@ class Player {
                 && enemy.y < this.y + game.playerHeight
                 && enemy.y + game.enemyHeight > this.y;
 
-            enemyBoundingBox && (this.winner = true);
+            enemyBoundingBox && this.gameOver();
         })
 
     }
 
-    reset(x = (game.))
+    checkWin = () => {
+        if (this.y < game.lowerLimit) {
+            this.reset();
+            alert('You win!');
+        }
+    }
+
+    gameOver = () => {
+        this.reset();
+        alert('You lose!');
+
+    }
+
+    reset(x = game.tileWidth * 2, y = game.tileHeight * 6) {
+        setTimeout(() => {
+            this.x = x;
+            this.y = y;
+        }, 500)
+    }
 }
 
 
