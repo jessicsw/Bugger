@@ -3,14 +3,16 @@ let game = {
     tileHeight: 80,
     upperLimit: 400,
     lowerLimit: 0,
+    enemyWidth: 105,
 };
 
 //Enemy bug constructor
 class Enemy {
-    constructor(x = 0, y = 140, direction) {
+    constructor(x = 0, y = 140, direction, speed) {
         this.sprite = 'images/enemy-bug.png';
         this.x = x;
         this.y = y;
+        this.speed = speed
         this.direction = direction;
     }
 
@@ -20,10 +22,18 @@ class Enemy {
     // which will ensure the game runs at the same speed for
     // all computers.
     update = dt => {
-        if (this.direction === "+") {
-            this.x += (enemySpeed * dt);
+        switch (this.direction) {
+            case "+":
+                this.x += (this.speed * dt);
+                this.x > (game.upperLimit + game.enemyWidth) &&
+                    this.randomizeBugSpecs();
         }
     }
+
+    randomizeBugSpecs = () => {
+        this.x = game.lowerLimit - game.enemyWidth;
+
+    };
 
     // Draw the enemy on the screen, required method for game
     render = () => {
@@ -90,10 +100,13 @@ let initiateGame = () => {
     player = new Player();
 
     allEnemies = [];
-    enemySpeed = 50;
+    enemySpeed = 100;
 
+    alphaBug = new Enemy(0, 80, "+", enemySpeed);
+    betaBug = new Enemy(120, 160, "+", enemySpeed);
+    gammaBug = new Enemy(50, 240, "+", enemySpeed);
 
-
+    allEnemies.push(alphaBug, betaBug, gammaBug);
 }
 
 

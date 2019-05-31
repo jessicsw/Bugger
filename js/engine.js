@@ -27,7 +27,7 @@ const Engine = (function (global) {
     const div = document.getElementById('canvas-container');
     let lastTime;
 
-    let width = 600;
+    let width = 505;
     let height = 600;
 
     canvas.id = 'game-container'
