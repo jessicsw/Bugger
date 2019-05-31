@@ -9,8 +9,8 @@ let game = {
 
 //Enemy bug constructor
 class Enemy {
-    constructor(x = 0, y = 140, direction, speed) {
-        this.sprite = 'images/enemy-bug.png';
+    constructor(sprite, x = 0, y = 140, direction, speed) {
+        this.sprite = sprite;
         this.x = x;
         this.y = y;
         this.speed = speed
@@ -39,9 +39,16 @@ class Enemy {
     }
 
     randomizeBugSpecs = direction => {
-        direction === "+"
-            ? (this.x = game.lowerLimit - game.enemyWidth)
-            : (this.x = game.upperLimit + game.enemyWidth)
+        if (direction === "+") {
+            this.sprite = 'images/enemy-bug.png'
+            this.x = game.lowerLimit - game.enemyWidth
+        }
+        else {
+            this.sprite = 'images/enemy-bug-reverse.png'
+            this.x = game.upperLimit + game.enemyWidth
+        }
+
+        this.speed = Math.floor(Math.random() * (enemySpeed + 50)) + enemySpeed;
         this.changeDirection();
     };
 
@@ -67,7 +74,7 @@ class Player {
     };
 
     update = () => {
-        //Play board limitations
+        //Player board limitations
         if (this.x < game.lowerLimit) {
             this.x = game.lowerLimit;
         }
@@ -80,11 +87,12 @@ class Player {
         else if (this.y > game.upperLimit) {
             this.y = game.upperLimit;
         }
-    };
+    }
 
+    //Draws player on board
     render = () => {
         ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
-    };
+    }
 
     handleInput = key => {
         switch (key) {
@@ -97,7 +105,11 @@ class Player {
             case 'down':
                 return this.y += game.tileHeight;
         }
-    };
+    }
+
+    checkCollision = () => {
+
+    }
 }
 
 
@@ -111,10 +123,17 @@ let initiateGame = () => {
 
     allEnemies = [];
     enemySpeed = 100;
+    initialDirection = Math.random() > 0.5
+        ? "+"
+        : "-"
+    initialSprite = initialDirection === "+"
+        ? 'images/enemy-bug.png'
+        : 'images/enemy-bug-reverse.png'
 
-    alphaBug = new Enemy(0, 80, "+", enemySpeed);
-    betaBug = new Enemy(120, 160, "-", enemySpeed);
-    gammaBug = new Enemy(50, 240, "+", enemySpeed);
+
+    alphaBug = new Enemy(initialSprite, 0, 80, initialDirection, enemySpeed);
+    betaBug = new Enemy(initialSprite, 120, 160, initialDirection, enemySpeed);
+    gammaBug = new Enemy(initialSprite, 50, 240, initialDirection, enemySpeed);
 
     allEnemies.push(alphaBug, betaBug, gammaBug);
 }
