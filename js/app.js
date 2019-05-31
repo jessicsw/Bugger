@@ -4,6 +4,7 @@ let game = {
     upperLimit: 400,
     lowerLimit: 0,
     enemyWidth: 105,
+    accelerator: 1.2,
 };
 
 //Enemy bug constructor
@@ -26,13 +27,22 @@ class Enemy {
             case "+":
                 this.x += (this.speed * dt);
                 this.x > (game.upperLimit + game.enemyWidth) &&
+                    this.randomizeBugSpecs("+");
+                break;
+            case "-":
+                this.x -= (this.speed * dt);
+                this.x < (game.lowerLimit - game.enemyWidth) &&
                     this.randomizeBugSpecs();
+                break;
+
         }
     }
 
-    randomizeBugSpecs = () => {
-        this.x = game.lowerLimit - game.enemyWidth;
-
+    randomizeBugSpecs = direction => {
+        direction === "+"
+            ? (this.x = game.lowerLimit - game.enemyWidth)
+            : (this.x = game.upperLimit + game.enemyWidth)
+        this.changeDirection();
     };
 
     // Draw the enemy on the screen, required method for game
@@ -42,7 +52,7 @@ class Enemy {
 
     changeDirection = () => {
         let newDir = Math.random();
-        (newDir > 0.5) ? (this.enemySpeed * -1) : this.enemySpeed
+        (newDir > 0.5) ? (this.direction = "+") : (this.direction = "-")
     };
 }
 
@@ -103,7 +113,7 @@ let initiateGame = () => {
     enemySpeed = 100;
 
     alphaBug = new Enemy(0, 80, "+", enemySpeed);
-    betaBug = new Enemy(120, 160, "+", enemySpeed);
+    betaBug = new Enemy(120, 160, "-", enemySpeed);
     gammaBug = new Enemy(50, 240, "+", enemySpeed);
 
     allEnemies.push(alphaBug, betaBug, gammaBug);
