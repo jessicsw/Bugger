@@ -3,23 +3,38 @@
 
 <head>
     <meta charset="UTF-8">
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <title>Classic Arcade Game</title>
     <link rel="stylesheet" href="css/style.css">
 </head>
 
 <body>
-    <!-- <h2 class="title">Classic Arcade Game</h2>
-    
-    <p class="instructions">
-        Use the <strong>arrow keys</strong> on your keyboard to move your player.
-        </br>Watch out for those pesky bugs! Good luck!
-    </p>
+    <div class="intro">
+        <h2 class="title">Bugger</h2>
 
-    <button class="start-button">Start</button> -->
+        <p class="instructions">
+            Use the <strong>arrow keys</strong> on your keyboard to move your player.
+            </br>
+            Watch out for those pesky bugs!
+            </br>
+            </br>Good luck!
+
+        </p>
+
+        <button id="start-button">Start</button>
+        <h2 id="win-message">You win!</h2>
+        <div id="game-over">
+            <h2 id="lose-message">You lose.</h2>
+            <button id="restart-button">Restart</button>
+        </div>
+    </div>
 
     <div id="game">
         <div id="canvas-container"></div>
+
     </div>
+
+
 
     <script src="js/resources.js"></script>
     <script src="js/app.js"></script>

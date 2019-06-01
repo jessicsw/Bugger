@@ -1,17 +1,63 @@
-html {
+html, body {
+    position: relative;
+    font-family: sans-serif;
+    font-weight: 400;
+    padding: 0;
+    overflow: hidden;
+    height: 100%;
+    width: 100%;
+    margin: 0 auto;
     background: #000;
 }
 
-body {
-    text-align: center;
-    overflow: hidden;
-}
 
 #canvas-container {
     position: absolute;
-    height: 100%;
+    height: auto;
+    width: auto;
+    left: 40%;
+    right: 0;
+    bottom: 2%;
+}
+
+button {
+    display: inline-block;
+    width: auto;
+    height: auto;
+    outline: none;
+    cursor: pointer;
+}
+
+
+/* Intro */
+.intro {
+    display: inline-block;
+    padding-top: 1%;
+    padding-left: 2%;
+    width: auto;
+}
+
+.title {
+    /* display: block; */
+    color: #fff;
+}
+
+.intro > p {
+    color: #fff;
+}
+
+/* Game Status */
+#win-message {
+    display: none;
+    color: #fff;
     width: 100%;
-    left: 0%;
-    right: 0%;
-    bottom: 1.9%;
+    text-align: center;
+}
+
+#game-over {
+    display: none;
+    color: #fff;
+    width: 100%;
+    text-align: center;
+    padding: 0 auto;
 }

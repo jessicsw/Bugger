@@ -1,4 +1,7 @@
 let game = {
+    startButton: $('#start-button'),
+    winMessage: $('#win-message'),
+    gameOver: $('#game-over'),
     tileWidth: 100,
     tileHeight: 80,
     upperLimit: 400,
@@ -53,7 +56,7 @@ class Enemy {
                 break;
         }
 
-        this.speed = Math.floor(Math.random() * (enemySpeed + 50)) + enemySpeed;
+        this.speed = Math.floor(Math.random() * 150) + 100;
         this.changeDirection();
     };
 
@@ -129,17 +132,18 @@ class Player {
 
     checkWin = () => {
         if (this.y === 0) {
+            game.winMessage.toggle();
             setTimeout(() => {
-                alert('You win!')
-            }, 100);
-            this.reset();
+                game.winMessage.toggle();
+                this.reset();
+            }, 500);
         }
     }
 
     gameOver = () => {
+        game.gameOver.toggle();
+        allEnemies = [];
         this.reset();
-        alert('You lose!');
-
     }
 
     reset(x = game.tileWidth * 2, y = game.tileHeight * 6) {
@@ -160,7 +164,6 @@ let initiateGame = () => {
     player = new Player();
 
     allEnemies = [];
-    enemySpeed = 100;
     enemyDirection = Math.random() > 0.5
         ? "+"
         : "-"
@@ -169,11 +172,24 @@ let initiateGame = () => {
         : 'images/enemy-bug-reverse.png'
 
 
-    alphaBug = new Enemy(enemySprite, 0, 80, enemyDirection, enemySpeed);
-    betaBug = new Enemy(enemySprite, 120, 160, enemyDirection, enemySpeed);
-    gammaBug = new Enemy(enemySprite, 50, 240, enemyDirection, enemySpeed);
-
-    startGame();
+    alphaBug = new Enemy(
+        enemySprite,
+        -105,
+        60,
+        enemyDirection,
+        Math.floor(Math.random() * 150) + 100);
+    betaBug = new Enemy(
+        enemySprite,
+        -105,
+        140,
+        enemyDirection,
+        Math.floor(Math.random() * 150) + 100);
+    gammaBug = new Enemy(
+        enemySprite,
+        -105,
+        220,
+        enemyDirection,
+        Math.floor(Math.random() * 150) + 100);
 }
 
 let startGame = () => (
@@ -197,3 +213,16 @@ document.addEventListener('keyup', function (e) {
 });
 
 initiateGame();
+
+//jQuery
+game.startButton
+    .on('click', () => {
+        startGame();
+        game.startButton.toggle();
+    })
+
+game.gameOver
+    .on('click', () => {
+        startGame();
+        game.gameOver.toggle();
+    })
