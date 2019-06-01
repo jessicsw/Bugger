@@ -1,4 +1,5 @@
 html, body {
+    display: flex;
     position: relative;
     font-family: 'Courier New', Courier, monospace;
     font-weight: 400;
@@ -11,14 +12,12 @@ html, body {
 }
 
 
-#canvas-container {
-    position: absolute;
+/* #canvas-container {
+    display: inline-block;
     height: auto;
     width: auto;
-    left: 43.5%;
-    right: 0;
-    bottom: 2%;
-}
+    margin: 0 auto;
+} */
 
 button {
     display: inline-block;
@@ -32,8 +31,8 @@ button {
 /* Intro */
 .intro {
     display: inline-block;
-    padding-top: 1%;
-    padding-left: 2%;
+    overflow-wrap: break-word;
+    padding: 1% 2%;
     width: auto;
     font-size: 15px;
 }

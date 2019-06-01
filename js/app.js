@@ -45,13 +45,15 @@ class Enemy {
     }
 
     randomizeBugSpecs = direction => {
+        let newSprite = this.sprite.match('-(.*)-')[1];
+
         switch (direction) {
             case "+":
-                this.sprite = 'images/enemy-bug.png'
+                this.sprite = 'images/enemy-' + newSprite + '.png'
                 this.x = game.lowerLimit - game.enemyWidth
                 break;
             case "-":
-                this.sprite = 'images/enemy-bug-reverse.png'
+                this.sprite = 'images/enemy-' + newSprite + 'reverse.png'
                 this.x = game.upperLimit + game.enemyWidth
                 break;
         }
@@ -76,7 +78,7 @@ class Enemy {
 // a handleInput() method.
 class Player {
     constructor(x = game.tileWidth * 2, y = game.tileHeight * 6) {
-        this.sprite = 'images/char-cat-girl.png';
+        this.sprite = 'images/char-pink.png';
         this.x = x;
         this.y = y;
     };
@@ -169,25 +171,35 @@ let initiateGame = () => {
     enemyDirection = Math.random() > 0.5
         ? "+"
         : "-"
-    enemySprite = enemyDirection === "+"
-        ? 'images/enemy-bug.png'
-        : 'images/enemy-bug-reverse.png'
+
+    // Enemy sprites
+    alphaSprite = enemyDirection === "+"
+        ? 'images/enemy-fly.png'
+        : 'images/enemy-fly-reverse.png'
+
+    betaSprite = enemyDirection === "+"
+        ? 'images/enemy-blob.png'
+        : 'images/enemy-blob-reverse.png'
+
+    gammaSprite = enemyDirection === "+"
+        ? 'images/enemy-snail.png'
+        : 'images/enemy-snail-reverse.png'
 
 
     alphaBug = new Enemy(
-        enemySprite,
+        alphaSprite,
         -105,
         60,
         enemyDirection,
         Math.floor(Math.random() * 250) + 200);
     betaBug = new Enemy(
-        enemySprite,
+        betaSprite,
         -105,
         140,
         enemyDirection,
         Math.floor(Math.random() * 250) + 200);
     gammaBug = new Enemy(
-        enemySprite,
+        gammaSprite,
         -105,
         220,
         enemyDirection,

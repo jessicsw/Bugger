@@ -27,8 +27,8 @@ const Engine = (function (global) {
     const div = document.getElementById('canvas-container');
     let lastTime;
 
-    let width = 505;
-    let height = 605;
+    let width = 480;
+    let height = 725;
 
     canvas.id = 'game-container'
     canvas.width = width;
@@ -115,15 +115,15 @@ const Engine = (function (global) {
          * for that particular row of the game level.
          */
         var rowImages = [
-            'images/water-block.png',   // Top row is water
-            'images/stone-block.png',   // Row 1 of 3 of stone
-            'images/stone-block.png',   // Row 2 of 3 of stone
-            'images/stone-block.png',   // Row 3 of 3 of stone
-            'images/grass-block.png',   // Row 1 of 2 of grass
+            'images/finish-block.png',   // Top row is water
+            'images/stone-block.png',   // Row 1 of 4 of stone
+            'images/stone-block.png',   // Row 2 of 4 of stone
+            'images/stone-block.png',   // Row 3 of 4 of stone
+            'images/stone-block.png',   // Row 4 of 4 of stone
             'images/grass-block.png'    // Row 2 of 2 of grass
         ],
             numRows = 6,
-            numCols = 5,
+            numCols = 6,
             row, col;
 
         // Before drawing, clear existing canvas
@@ -133,16 +133,26 @@ const Engine = (function (global) {
          * and, using the rowImages array, draw the correct image for that
          * portion of the "grid"
          */
+        let gridDisposition = 5;
+
         for (row = 0; row < numRows; row++) {
             for (col = 0; col < numCols; col++) {
                 /* The drawImage function of the canvas' context element
-                 * requires 3 parameters: the image to draw, the x coordinate
-                 * to start drawing and the y coordinate to start drawing.
-                 * We're using our Resources helpers to refer to our images
-                 * so that we get the benefits of caching these images, since
-                 * we're using them over and over.
-                 */
-                ctx.drawImage(Resources.get(rowImages[row]), col * 101, row * 83);
+                * requires 3 parameters: the image to draw, the x coordinate
+                * to start drawing and the y coordinate to start drawing.
+                * We're using our Resources helpers to refer to our images
+                * so that we get the benefits of caching these images, since
+                * we're using them over and over.
+                */
+                if (row === 0) {
+                    ctx.drawImage(Resources.get(rowImages[0]), col * 80, 0);
+                } else {
+                    ctx.drawImage(Resources.get(
+                        rowImages[row]),
+                        col * 80,
+                        row * 77 + gridDisposition
+                    );
+                }
             }
         }
 
@@ -178,11 +188,15 @@ const Engine = (function (global) {
      */
     Resources.load([
         'images/stone-block.png',
-        'images/water-block.png',
+        'images/finish-block.png',
         'images/grass-block.png',
-        'images/enemy-bug.png',
-        'images/enemy-bug-reverse.png',
-        'images/char-cat-girl.png'
+        'images/enemy-blob.png',
+        'images/enemy-blob-reverse.png',
+        'images/enemy-fly.png',
+        'images/enemy-fly-reverse.png',
+        'images/enemy-snail.png',
+        'images/enemy-snail-reverse.png',
+        'images/char-pink.png'
     ]);
     Resources.onReady(init);
 
