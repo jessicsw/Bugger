@@ -15,7 +15,7 @@ html, body {
     position: absolute;
     height: auto;
     width: auto;
-    left: 40%;
+    left: 41%;
     right: 0;
     bottom: 2%;
 }
@@ -35,6 +35,7 @@ button {
     padding-top: 1%;
     padding-left: 2%;
     width: auto;
+    font-size: 18px;
 }
 
 .title {

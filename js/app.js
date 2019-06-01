@@ -136,14 +136,16 @@ class Player {
             setTimeout(() => {
                 game.winMessage.toggle();
                 this.reset();
-            }, 500);
+            }, 700);
         }
     }
 
     gameOver = () => {
         game.gameOver.toggle();
+        setTimeout(() => {
+            this.reset()
+        }, 500);
         allEnemies = [];
-        this.reset();
     }
 
     reset(x = game.tileWidth * 2, y = game.tileHeight * 6) {
