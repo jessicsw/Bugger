@@ -1,6 +1,6 @@
 html, body {
     position: relative;
-    font-family: sans-serif;
+    font-family: 'Courier New', Courier, monospace;
     font-weight: 400;
     padding: 0;
     overflow: hidden;
@@ -15,7 +15,7 @@ html, body {
     position: absolute;
     height: auto;
     width: auto;
-    left: 41%;
+    left: 43.5%;
     right: 0;
     bottom: 2%;
 }
@@ -35,7 +35,7 @@ button {
     padding-top: 1%;
     padding-left: 2%;
     width: auto;
-    font-size: 18px;
+    font-size: 15px;
 }
 
 .title {
