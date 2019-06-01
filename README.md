@@ -2,6 +2,8 @@
 
 ![](demo/bugger-example.gif)
 
+[insert live link]
+
 Bugger is an arcade-style game built with a game loop engine and visual assets to re-create the classic game, Frogger. The game begins with the player in the grassy bottom portion of the screen. Arrow keys or WASD are used to navigate the player across the landscape. Enemy bugs travel across the screen at different velocities as the player tries to make it to the river.
 
 If the player collides with an enemy bug, the player loses and is reset back to the starting point on the grassy bottom portion of the screen. The player wins when they reach the river and is also reset back to the starting point to begin a new game.
