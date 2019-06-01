@@ -56,7 +56,7 @@ class Enemy {
                 break;
         }
 
-        this.speed = Math.floor(Math.random() * 150) + 100;
+        this.speed = Math.floor(Math.random() * 250) + 200;
         this.changeDirection();
     };
 
@@ -179,19 +179,19 @@ let initiateGame = () => {
         -105,
         60,
         enemyDirection,
-        Math.floor(Math.random() * 150) + 100);
+        Math.floor(Math.random() * 250) + 200);
     betaBug = new Enemy(
         enemySprite,
         -105,
         140,
         enemyDirection,
-        Math.floor(Math.random() * 150) + 100);
+        Math.floor(Math.random() * 250) + 200);
     gammaBug = new Enemy(
         enemySprite,
         -105,
         220,
         enemyDirection,
-        Math.floor(Math.random() * 150) + 100);
+        Math.floor(Math.random() * 250) + 200);
 }
 
 let startGame = () => (

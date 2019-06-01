@@ -1,6 +1,6 @@
 # Bugger
 
-[insert gif]
+![screenshot](images/bugger_example.gif)
 
 Bugger is an arcade-style game built with a game loop engine and visual assets to re-create the classic game, Frogger. The game begins with the player in the grassy bottom portion of the screen. Arrow keys or WASD are used to navigate the player across the landscape. Enemy bugs travel across the screen at different velocities as the player tries to make it to the river.
 
@@ -23,7 +23,7 @@ Current features of the game include:
 -[X] Includes WASD movement
 -[X] On-page instructures are viewable to guide the player
 
-## Keyboard-Based Controls
+### Keyboard-Based Controls
 
 The player controls all movement of the paddle via arrow keys or WASD. Upon triggering a keyup event, the event listener will return the direction of the arrow key.
 
@@ -45,7 +45,7 @@ handleInput = key => {
 }
 ```
 
-## Collision Detection
+### Collision Detection
 
   During gameplay, two entities are able to collide with each other--the player and the enemy bug.
 
