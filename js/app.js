@@ -79,10 +79,6 @@ class Player {
     };
 
     update = () => {
-        //Check if won
-        this.checkWin()
-
-
         //Player board limitations
         if (this.x < game.lowerLimit) {
             this.x = game.lowerLimit;
@@ -110,7 +106,8 @@ class Player {
             case 'right':
                 return this.x += game.tileWidth;
             case 'up':
-                return this.y -= game.tileHeight;
+                this.y -= game.tileHeight;
+                return this.checkWin();
             case 'down':
                 return this.y += game.tileHeight;
         }
@@ -131,9 +128,11 @@ class Player {
     }
 
     checkWin = () => {
-        if (this.y < game.lowerLimit) {
+        if (this.y === 0) {
+            setTimeout(() => {
+                alert('You win!')
+            }, 100);
             this.reset();
-            alert('You win!');
         }
     }
 
@@ -147,7 +146,7 @@ class Player {
         setTimeout(() => {
             this.x = x;
             this.y = y;
-        }, 500)
+        }, 100)
     }
 }
 
@@ -174,8 +173,14 @@ let initiateGame = () => {
     betaBug = new Enemy(enemySprite, 120, 160, enemyDirection, enemySpeed);
     gammaBug = new Enemy(enemySprite, 50, 240, enemyDirection, enemySpeed);
 
-    allEnemies.push(alphaBug, betaBug, gammaBug);
+    startGame();
 }
+
+let startGame = () => (
+    allEnemies.push(alphaBug, betaBug, gammaBug)
+)
+
+
 
 
 // This listens for key presses and sends the keys to your

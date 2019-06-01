@@ -28,7 +28,7 @@ const Engine = (function (global) {
     let lastTime;
 
     let width = 505;
-    let height = 600;
+    let height = 605;
 
     canvas.id = 'game-container'
     canvas.width = width;

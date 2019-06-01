@@ -1,4 +1,17 @@
+html {
+    background: #000;
+}
+
 body {
     text-align: center;
     overflow: hidden;
+}
+
+#canvas-container {
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    left: 0%;
+    right: 0%;
+    bottom: 1.9%;
 }
