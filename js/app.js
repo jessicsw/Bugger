@@ -211,8 +211,8 @@ document.addEventListener('keyup', function (e) {
         40: 'down',
         65: 'left',
         87: 'up',
-        70: 'right',
-        68: 'down'
+        83: 'down',
+        68: 'right'
     };
 
     player.handleInput(allowedKeys[e.keyCode]);
