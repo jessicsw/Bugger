@@ -6,7 +6,7 @@
 
 Crossroads is an arcade-style game built with a game loop engine and visual assets to re-create the classic game, Frogger. The game begins with the player in the grassy bottom portion of the screen. Arrow keys or WASD keys are used to navigate the player across the landscape. Enemy bugs travel across the screen at different velocities as the player tries to make it to the river.
 
-If the player collides with an enemy bug, the player loses and is reset back to the starting point on the grassy bottom portion of the screen. The player wins when they reach the river and is also reset back to the starting point to begin a new game.
+If the player collides with an enemy bug, the player loses a heart and is reset back to the starting point on the grassy bottom portion of the screen until the player runs out of hearts.
 
 
 Crossroads utilizes the following:
@@ -16,14 +16,14 @@ Crossroads utilizes the following:
 
 # Gameplay and Features
 
-Crossroads contains 3 enemy bugs. In order to win, the player must reach the river.
+Crossroads contains 3 enemy bugs. In order to continue gameplay, the player must successfully reach the river.
 
 Current features of the game include:
--[X] Laterally-moving enemies to avoid
--[X] Enemies travel at random velocities and increase in speed with each next level
--[X] Statistics (score and hearts) are tracked and updated live on-screen
--[X] Includes WASD movement (sorry, no strafeing)
--[X] On-page instructures are viewable to guide the player
+-[x] Laterally-moving enemies to avoid
+-[x] Enemies travel at random velocities and increase in speed with each next level
+-[x] Statistics (score and hearts) are tracked and updated live on-screen
+-[x] Includes WASD movement (sorry, no strafeing)
+-[x] On-page instructures are viewable to guide the player
 
 ### Keyboard-Based Controls
 
@@ -63,10 +63,21 @@ handleInput = key => {
         && enemy.y + game.enemyHeight > this.y;
 
         enemyBoundingBox && this.gameOver();
-      });
-
+    });
   }
   ```
+
+### Player status
+
+<details>
+  <summary>Score</summary>
+  <p>Players earn points for each successful crossing and each enemy's velocity increases via an accelerator constant after 250 points have been delegated.</p>
+</details>
+
+<details>
+  <summary>Hearts</summary>
+  <p>At the start of each game, the player has six hearts. For each collision with an enemy, the player loses a heart and is reset back to the starting point. When the player has no more hearts, they lose.</p>
+</details>
 
 # Future Release
 - [ ] Pause and Resume
