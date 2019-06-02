@@ -2,14 +2,17 @@ let game = {
     startButton: $('#start-button'),
     winMessage: $('#win-message'),
     gameOver: $('#game-over'),
-    tileWidth: 100,
-    tileHeight: 80,
-    upperLimit: 400,
-    lowerLimit: 0,
-    enemyWidth: 105,
+    tileWidth: 80,
+    tileHeight: 77,
+    upperXLimit: 420,
+    lowerXLimit: 20,
+    upperYLimit: 400,
+    lowerYLimit: 20,
+    enemyWidth: 40,
     enemyHeight: 60,
-    playerWidth: 75,
-    playerHeight: 60,
+    offset: 20,
+    playerWidth: 80,
+    playerHeight: 56,
     accelerator: 1.2,
 };
 
@@ -76,8 +79,9 @@ class Enemy {
 // Now write your own player class
 // This class requires an update(), render() and
 // a handleInput() method.
+
 class Player {
-    constructor(x = game.tileWidth * 2, y = game.tileHeight * 6) {
+    constructor(x = game.offset * 9, y = game.offset * 20) {
         this.sprite = 'images/char-pink.png';
         this.x = x;
         this.y = y;
@@ -85,17 +89,17 @@ class Player {
 
     update = () => {
         //Player board limitations
-        if (this.x < game.lowerLimit) {
-            this.x = game.lowerLimit;
+        if (this.x < game.lowerXLimit) {
+            this.x = game.lowerXLimit;
         }
-        else if (this.x > game.upperLimit) {
-            this.x = game.upperLimit;
+        else if (this.x > game.upperXLimit) {
+            this.x = game.upperXLimit;
         }
-        else if (this.y < game.lowerLimit) {
-            this.y = game.lowerLimit;
+        else if (this.y < game.lowerYLimit) {
+            this.y = game.lowerYLimit;
         }
-        else if (this.y > game.upperLimit) {
-            this.y = game.upperLimit;
+        else if (this.y > game.upperYLimit) {
+            this.y = game.upperYLimit;
         }
     }
 
@@ -114,6 +118,7 @@ class Player {
                 this.y -= game.tileHeight;
                 return this.checkWin();
             case 'down':
+                console.log(this.y)
                 return this.y += game.tileHeight;
         }
     }
