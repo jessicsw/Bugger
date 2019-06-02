@@ -19,11 +19,11 @@ Crossroads utilizes the following:
 Crossroads contains 3 enemy bugs. In order to continue gameplay, the player must successfully reach the river.
 
 Current features of the game include:
--[x] Laterally-moving enemies to avoid
--[x] Enemies travel at random velocities and increase in speed with each next level
--[x] Statistics (score and hearts) are tracked and updated live on-screen
--[x] Includes WASD movement (sorry, no strafeing)
--[x] On-page instructures are viewable to guide the player
+- [x] Laterally-moving enemies to avoid
+- [x] Enemies travel at random velocities and increase in speed with each next level
+- [x] Statistics (score and hearts) are tracked and updated live on-screen
+- [x] Includes WASD movement (sorry, no strafeing)
+- [x] On-page instructures are viewable to guide the player
 
 ### Keyboard-Based Controls
 
