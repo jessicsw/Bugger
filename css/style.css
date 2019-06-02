@@ -32,13 +32,12 @@ button {
 .intro {
     display: inline-block;
     overflow-wrap: break-word;
-    padding: 1% 2%;
+    padding: 15px 30px;
     width: auto;
     font-size: 15px;
 }
 
 .title {
-    /* display: block; */
     color: #fff;
 }
 
@@ -46,7 +45,11 @@ button {
     color: #fff;
 }
 
-/* Game Status */
+h2 {
+    margin: 0;
+}
+
+/* Game status */
 #win-message {
     display: none;
     color: #fff;
@@ -60,4 +63,29 @@ button {
     width: 100%;
     text-align: center;
     padding: 0 auto;
+}
+
+/* Player status */ 
+ul {
+    margin: 0;
+}
+
+#player-status {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    padding-top: 15px;
+    color: #fff;
+}
+
+#score {
+    margin: auto 0;
+}
+
+#hearts {
+    display: flex;
+}
+
+#hearts > li {
+    list-style: none;
 }

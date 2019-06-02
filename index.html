@@ -4,6 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/crafty/0.5.4/crafty-min.js"></script>
     <title>Bugger</title>
     <link rel="stylesheet" href="css/style.css">
 </head>
@@ -31,8 +32,17 @@
     </div>
 
     <div id="game">
-        <div id="canvas-container"></div>
+        <div id="player-status">
+            <div id="score">
+                <span>Score: </span>
+                <span id="points">0</span>
+            </div>
+            <ul id="hearts">
 
+            </ul>
+        </div>
+        <div id="canvas-container"></div>
+    </div>
     </div>
 
 

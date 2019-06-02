@@ -28,7 +28,7 @@ const Engine = (function (global) {
     let lastTime;
 
     let width = 480;
-    let height = 725;
+    let height = 510;
 
     canvas.id = 'game-container'
     canvas.width = width;
@@ -190,12 +190,16 @@ const Engine = (function (global) {
         'images/stone-block.png',
         'images/finish-block.png',
         'images/grass-block.png',
-        'images/enemy-blob.png',
-        'images/enemy-blob-reverse.png',
+        'images/enemy-spider.png',
+        'images/enemy-spider-reverse.png',
         'images/enemy-fly.png',
         'images/enemy-fly-reverse.png',
         'images/enemy-snail.png',
         'images/enemy-snail-reverse.png',
+        'images/enemy-ghost.png',
+        'images/enemy-ghost-reverse.png',
+        'images/enemy-mouse.png',
+        'images/enemy-mouse-reverse.png',
         'images/char-pink.png'
     ]);
     Resources.onReady(init);

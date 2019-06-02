@@ -1,20 +1,27 @@
-let game = {
+const game = {
     startButton: $('#start-button'),
     winMessage: $('#win-message'),
     gameOver: $('#game-over'),
+    points: document.getElementById('points'),
+    hearts: document.getElementById('hearts'),
     tileWidth: 80,
     tileHeight: 77,
     upperXLimit: 420,
     lowerXLimit: 20,
     upperYLimit: 400,
     lowerYLimit: 20,
-    enemyWidth: 40,
-    enemyHeight: 60,
+    enemyWidth: 100,
+    enemyHeight: 42,
     offset: 20,
-    playerWidth: 80,
+    playerWidth: 50,
     playerHeight: 56,
     accelerator: 1.2,
 };
+
+let score = 0,
+    levelUpPoints = 50,
+    hearts = 6;
+
 
 //Enemy bug constructor
 class Enemy {
@@ -35,12 +42,12 @@ class Enemy {
         switch (this.direction) {
             case "+":
                 this.x += (this.speed * dt);
-                this.x > (game.upperLimit + game.enemyWidth) &&
+                this.x > (game.upperXLimit + game.enemyWidth) &&
                     this.randomizeBugSpecs("+");
                 break;
             case "-":
                 this.x -= (this.speed * dt);
-                this.x < (game.lowerLimit - game.enemyWidth) &&
+                this.x < (0 - game.enemyWidth) &&
                     this.randomizeBugSpecs("-");
                 break;
 
@@ -48,20 +55,24 @@ class Enemy {
     }
 
     randomizeBugSpecs = direction => {
-        let newSprite = this.sprite.match('-(.*)-')[1];
+        let startPos = this.sprite.indexOf('-') + 1;
+        let endPos = this.sprite.indexOf('-', startPos) === -1
+            ? this.sprite.indexOf('.', startPos)
+            : this.sprite.indexOf('-', startPos);
+        let newSprite = this.sprite.substring(startPos, endPos);
 
         switch (direction) {
             case "+":
                 this.sprite = 'images/enemy-' + newSprite + '.png'
-                this.x = game.lowerLimit - game.enemyWidth
+                this.x = game.lowerXLimit - game.enemyWidth
                 break;
             case "-":
-                this.sprite = 'images/enemy-' + newSprite + 'reverse.png'
-                this.x = game.upperLimit + game.enemyWidth
+                this.sprite = 'images/enemy-' + newSprite + '-reverse.png'
+                this.x = game.upperXLimit + game.enemyWidth
                 break;
         }
 
-        this.speed = Math.floor(Math.random() * 250) + 200;
+        this.speed = Math.floor(Math.random() * 150) + 100;
         this.changeDirection();
     };
 
@@ -85,6 +96,7 @@ class Player {
         this.sprite = 'images/char-pink.png';
         this.x = x;
         this.y = y;
+        this.loseHeart = false;
     };
 
     update = () => {
@@ -118,7 +130,6 @@ class Player {
                 this.y -= game.tileHeight;
                 return this.checkWin();
             case 'down':
-                console.log(this.y)
                 return this.y += game.tileHeight;
         }
     }
@@ -132,14 +143,58 @@ class Player {
                 && enemy.y < this.y + game.playerHeight
                 && enemy.y + game.enemyHeight > this.y;
 
-            enemyBoundingBox && this.gameOver();
-        })
+            let currentSpeed = enemy.speed;
+            if (enemyBoundingBox) {
+                this.loseHeart = true;
 
+                this.reset();
+            }
+        })
     }
 
+
+    //Player status
+    levelUp = () => {
+        game.accelerator = 1.05;
+    }
+
+    score = points => {
+        score += points;
+        this.speed *= 1.2;
+
+        game.points.innerHTML = score;
+
+        if (score > 250) {
+            levelUp();
+        }
+    }
+
+    removeHeart = () => {
+        switch (this.loseHeart) {
+            case true:
+                let li = document.getElementsByTagName('li');
+                game.hearts.removeChild(li[0]);
+                hearts -= 1;
+
+                if (hearts === 0) {
+                    game.hearts.innerHTML = "";
+                    this.gameOver();
+                }
+
+                this.loseHeart = false;
+                break;
+            case false:
+                break;
+        }
+    }
+
+
+    //Game status
     checkWin = () => {
-        if (this.y === 0) {
+        if (this.y === 15) {
             game.winMessage.toggle();
+            this.score(levelUpPoints)
+
             setTimeout(() => {
                 game.winMessage.toggle();
                 this.reset();
@@ -149,17 +204,23 @@ class Player {
 
     gameOver = () => {
         game.gameOver.toggle();
+
         setTimeout(() => {
             this.reset()
         }, 500);
+
+        score = 0;
+        hearts = 5;
         allEnemies = [];
     }
 
-    reset(x = game.tileWidth * 2, y = game.tileHeight * 6) {
+    reset = (x = game.offset * 9, y = game.offset * 20) => {
         setTimeout(() => {
+            this.removeHeart();
             this.x = x;
             this.y = y;
         }, 100)
+
     }
 }
 
@@ -168,51 +229,74 @@ class Player {
 // Now instantiate your objects.
 // Place all enemy objects in an array called allEnemies
 // Place the player object in a variable called player
+let initiateHearts = () => {
+    for (let i = 0; i < hearts; i++) {
+        let heartEl = document.createElement('li');
+        game.hearts.appendChild(heartEl);
+        heartEl.innerHTML = '<img src="images/heart.png">'
+    }
+}
 
 let initiateGame = () => {
     player = new Player();
 
+    initiateHearts();
+
     allEnemies = [];
+    enemySpeed = 125;
+    enemyXpos = - game.enemyWidth;
+
     enemyDirection = Math.random() > 0.5
         ? "+"
         : "-"
 
     // Enemy sprites
     alphaSprite = enemyDirection === "+"
-        ? 'images/enemy-fly.png'
-        : 'images/enemy-fly-reverse.png'
+        ? 'images/enemy-spider.png'
+        : 'images/enemy-spider-reverse.png'
 
     betaSprite = enemyDirection === "+"
-        ? 'images/enemy-blob.png'
-        : 'images/enemy-blob-reverse.png'
+        ? 'images/enemy-ghost.png'
+        : 'images/enemy-ghost-reverse.png'
 
     gammaSprite = enemyDirection === "+"
         ? 'images/enemy-snail.png'
         : 'images/enemy-snail-reverse.png'
 
+    deltaSprite = enemyDirection === "+"
+        ? 'images/enemy-fly.png'
+        : 'images/enemy-fly-reverse.png'
 
+
+    //Enemy objects
     alphaBug = new Enemy(
         alphaSprite,
-        -105,
-        60,
+        enemyXpos,
+        110,
         enemyDirection,
-        Math.floor(Math.random() * 250) + 200);
+        Math.floor(Math.random() * (enemySpeed + 25)) + enemySpeed);
     betaBug = new Enemy(
         betaSprite,
-        -105,
-        140,
+        enemyXpos,
+        179,
         enemyDirection,
-        Math.floor(Math.random() * 250) + 200);
+        Math.floor(Math.random() * (enemySpeed + 25)) + enemySpeed);
     gammaBug = new Enemy(
         gammaSprite,
-        -105,
-        220,
+        enemyXpos,
+        268,
         enemyDirection,
-        Math.floor(Math.random() * 250) + 200);
+        Math.floor(Math.random() * (enemySpeed + 25)) + enemySpeed);
+    deltaBug = new Enemy(
+        deltaSprite,
+        enemyXpos,
+        349,
+        enemyDirection,
+        Math.floor(Math.random() * (enemySpeed + 25)) + enemySpeed);
 }
 
 let startGame = () => (
-    allEnemies.push(alphaBug, betaBug, gammaBug)
+    allEnemies.push(alphaBug, betaBug, gammaBug, deltaBug)
 )
 
 
@@ -246,6 +330,7 @@ game.startButton
 
 game.gameOver
     .on('click', () => {
+        initiateGame();
         startGame();
         game.gameOver.toggle();
     })
