@@ -1,6 +1,8 @@
 # Crossroads
 
-![](demo/crossroads-example.gif)
+<p align="center">
+  <img width="550" height="300" src="demo/crossroads-demo.gif">
+</p>
 
 [insert live link]
 

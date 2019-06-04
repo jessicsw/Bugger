@@ -15,7 +15,7 @@ const game = {
     offset: 20,
     playerWidth: 50,
     playerHeight: 56,
-    accelerator: 1.2,
+    accelerator: 1.05,
 };
 
 let score = 0,
@@ -72,7 +72,7 @@ class Enemy {
                 break;
         }
 
-        this.speed = Math.floor(Math.random() * 150) + 100;
+        this.speed = Math.floor(Math.random() * (enemySpeed + 25)) + enemySpeed;
         this.changeDirection();
     };
 
@@ -155,7 +155,7 @@ class Player {
 
     //Player status
     levelUp = () => {
-        game.accelerator = 1.05;
+        enemySpeed *= game.accelerator;
     }
 
     score = points => {
@@ -165,7 +165,7 @@ class Player {
         game.points.innerHTML = score;
 
         if (score > 250) {
-            levelUp();
+            this.levelUp();
         }
     }
 

@@ -12,12 +12,9 @@ html, body {
 }
 
 
-/* #canvas-container {
-    display: inline-block;
-    height: auto;
-    width: auto;
-    margin: 0 auto;
-} */
+#game {
+    padding-right: 30px;
+}
 
 button {
     display: inline-block;

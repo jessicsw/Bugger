@@ -198,8 +198,6 @@ const Engine = (function (global) {
         'images/enemy-snail-reverse.png',
         'images/enemy-ghost.png',
         'images/enemy-ghost-reverse.png',
-        'images/enemy-mouse.png',
-        'images/enemy-mouse-reverse.png',
         'images/char-pink.png'
     ]);
     Resources.onReady(init);
