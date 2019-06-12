@@ -16,34 +16,32 @@ html, body {
     padding-right: 30px;
 }
 
-button {
-    display: inline-block;
-    width: auto;
-    height: auto;
-    outline: none;
-    cursor: pointer;
-}
 
 
 /* Intro */
 .intro {
     display: inline-block;
     overflow-wrap: break-word;
-    padding: 15px 30px;
+    padding: 16px 30px;
     width: auto;
-    font-size: 15px;
 }
 
 .title {
     color: #fff;
+    padding-bottom: 30px;
 }
 
 .intro > p {
     color: #fff;
 }
 
-h2 {
-    margin: 0;
+button {
+    display: inline-block;
+    width: auto;
+    height: auto;
+    outline: none;
+    cursor: pointer;
+    margin-top: 20px;
 }
 
 /* Game status */
@@ -63,15 +61,12 @@ h2 {
 }
 
 /* Player status */ 
-ul {
-    margin: 0;
-}
-
 #player-status {
     display: flex;
     justify-content: space-between;
     width: 100%;
     padding-top: 15px;
+    padding-bottom: 23px;
     color: #fff;
 }
 
